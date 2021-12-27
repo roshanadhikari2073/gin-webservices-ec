@@ -1,4 +1,4 @@
-// #author roshan
+// author roshan
 package controllers
 
 import (
@@ -12,8 +12,13 @@ import (
 
 var dbmap = initDb()
 
+//database initialization
 func initDb() *gorp.DbMap {
-	db, err := sql.Open("mysql", "root:Bumitama2016!mysql@tcp(localhost:3306)/test")
+	dbDriver := "mysql"
+	dbUser := "root"
+	dbPass := "1234"
+	dbName := "shardINDEX"
+	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@/"+dbName)
 	checkErr(err, "sql.Open failed")
 	dbmap := &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{Engine: "InnoDB", Encoding: "UTF8"}}
 	err = dbmap.CreateTablesIfNotExists()
